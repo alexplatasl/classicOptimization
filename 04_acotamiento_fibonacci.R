@@ -75,3 +75,13 @@ acotamiento_fibonacci <- function(a = 0, b = 5, n = 3, k = 2, eval = function(x)
 }
 
 acotamiento_fibonacci(n=3)
+
+# Comparación de exactitud de métodos
+n = seq(5,20,5)
+Ln_half = (0.5^(n/2))*5
+Ln_fib = (2 / unlist(lapply(n+1, fibonacci))) * Lo
+Ln_gold = ((0.681)^(n-1))*Lo
+Lo = 5
+Rn_half = Ln_half / Lo
+Rn_fib = Ln_fib / Lo
+Rn_gold = Ln_gold / Lo
