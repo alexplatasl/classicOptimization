@@ -4,7 +4,6 @@
 # Métodos Basados en Gradiente
   # Método Newton-Raphson
 
-
 newton_raphson <- function(x = 1, epsilon = 0.001,eval=function(x){x^2+54/x}){
   solucion <- c()
   # Paso 1:
