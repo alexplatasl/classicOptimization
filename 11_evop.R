@@ -1,3 +1,9 @@
+# OPTIMIZACIÓN CLÁSICA
+# ALEJANDRO PLATAS LÓPEZ
+# 15/OCTUBRE/2019
+# # Multivariable optimization algortihms
+# ### Direct search method
+# #### Box’s Evolutionary Optimization Method
 
 hiper <- function(punto.inicial, distancias){
   points <- list()
