@@ -1,9 +1,9 @@
-# Optimizaión clásica
+# Optimización clásica
 # Alejandro Platas López
 # 2/septiembre/2019
 # Método de acotamiento: búsqueda exhaustiva
 
-acotamiento <- function(a, b, n=10, evalua = function(x){x^2 + 54/x}){
+exhaustiva <- function(a, b, n=10, evalua = function(x){x^2 + 54/x}){
   ## Parámetros
   # a: Límite inferior del intervalo.
   # b: Límite superior del intervalo.
@@ -47,4 +47,5 @@ acotamiento <- function(a, b, n=10, evalua = function(x){x^2 + 54/x}){
 }
 
 # 
-acotamiento(0,5,500,  function(x){x^2 + 54/x})
+exhaustiva(0,5,25,  function(x){x^2 + 54/x})
+
