@@ -58,15 +58,17 @@ simplex_method <- function(simplex = list(x1=c(0,0),x2=c(2,0),x3=c(1,1)), gamma 
   solucion <- data.frame(do.call(rbind, xls))
   
   # Plotea recorrido de las xl
-  XS <- expand.grid(seq(0,4,by=0.1),seq(0,3,by=0.1))
-  XS$fx <- apply(XS, 1, eval)
-  names(XS)[1:2] <- c("X1","X2")
-  p <- ggplot2::ggplot(XS, ggplot2::aes(X1, X2, z = fx))+
-    ggplot2::geom_contour(bins = 15)
+  # XS <- expand.grid(seq(0,4,by=0.1),seq(0,3,by=0.1))
+  # XS$fx <- apply(XS, 1, eval)
+  # names(XS)[1:2] <- c("X1","X2")
+  # p <- ggplot2::ggplot(XS, ggplot2::aes(X1, X2, z = fx))+
+  #   ggplot2::geom_contour(bins = 15)
 
-  p <- p + ggplot2::ggplot(solucion) +
+  p <- ggplot2::ggplot(solucion) +
     ggplot2::geom_point(ggplot2::aes(x=X1, y= X2, colour = X4),size = 2) +
-    ggplot2::geom_path(ggplot2::aes(x=X1, y= X2, colour = X4)) +
+    ggplot2::geom_path(ggplot2::aes(x=X1, y= X2, colour = X4), 
+                       arrow = ggplot2::arrow(angle = 15, ends = "last", 
+                                              length = ggplot2::unit(0.10, "inches"), type = "closed")) +
     ggplot2::scale_colour_viridis_c(option="D",direction = 1, begin = 0, end = 0.95) +
     ggplot2::labs(colour = "", group = "", shape = "", fill = "") +
     ggplot2::theme_bw() +
@@ -77,11 +79,3 @@ simplex_method <- function(simplex = list(x1=c(0,0),x2=c(2,0),x3=c(1,1)), gamma 
 }
 
 solucion <- simplex_method(gamma = 1.5, beta = 0.5, eps = 0.001)
-
-
-eval = function(xs){(xs[1]^2 + xs[2] - 11)^2   + (xs[1] + xs[2]^2 - 7)^2}
-
-XS <- expand.grid(seq(0,4,by=0.1),seq(0,3,by=0.1))
-XS$fx <- apply(XS, 1, eval)
-ggplot2::ggplot(XS, ggplot2::aes(Var1, Var2, z = fx))+
-  ggplot2::geom_contour(bins = 15)
