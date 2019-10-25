@@ -57,13 +57,6 @@ simplex_method <- function(simplex = list(x1=c(0,0),x2=c(2,0),x3=c(1,1)), gamma 
   }
   solucion <- data.frame(do.call(rbind, xls))
   
-  # Plotea recorrido de las xl
-  # XS <- expand.grid(seq(0,4,by=0.1),seq(0,3,by=0.1))
-  # XS$fx <- apply(XS, 1, eval)
-  # names(XS)[1:2] <- c("X1","X2")
-  # p <- ggplot2::ggplot(XS, ggplot2::aes(X1, X2, z = fx))+
-  #   ggplot2::geom_contour(bins = 15)
-
   p <- ggplot2::ggplot(solucion) +
     ggplot2::geom_point(ggplot2::aes(x=X1, y= X2, colour = X4),size = 2) +
     ggplot2::geom_path(ggplot2::aes(x=X1, y= X2, colour = X4), 
