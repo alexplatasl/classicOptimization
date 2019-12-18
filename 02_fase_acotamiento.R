@@ -4,7 +4,7 @@
 # Método de acotamiento: Método de fase de acotamiento
 
 
-fase_acotamiento <- function(x0 = 0.6, delta = 0.5, evalua = function(x){x^2 + 54/x}){
+fase_acotamiento <- function(x0 = 0.6, delta = 0.5, evalua = function(x){x^2 + 54/x}, trace = FALSE){
   solucion <- NULL
   x <- x0
   
@@ -25,22 +25,24 @@ fase_acotamiento <- function(x0 = 0.6, delta = 0.5, evalua = function(x){x^2 + 5
 
   while(is.null(solucion)){
     # Paso 3:
-    i = k + 1
-    x_k_plus_1 <- x[i] + 2^k*delta
-    x_k_plus_1
-    x <- c(x,x_k_plus_1)
+    assign( paste0("x", k+1), get(paste0("x",k)) + 2^k*delta)
 
     # Paso 4:
-    if (evalua(x_k_plus_1) < evalua(x[i])){
+    if (evalua( get(paste0("x",k+1)) ) < evalua( get(paste0("x",k))) ){
       k = k + 1
-      cat("Iteracion:", k+1, "\tValor de x: ",x[length(x)],"\n")
+      if (trace) cat("Iteracion:", k, "\tx: ", get(paste0("x",k)) , "\tf(x)", evalua(get(paste0("x",k))) ,"\n")
     }else{
-      solucion <- c(x[i-1],x[i+1])
+      solucion <- c( get(paste0("x", k-1)),   get(paste0("x", k+1))  )
     }
   }
-  cat("\nEl mínimo se encuentra en el intervalo:\n")
+  if (trace)  cat("\nEl mínimo se encuentra en el intervalo:\n")
   sort(solucion)
 }
 
 # Ejemplo
-fase_acotamiento(x0=0.6, delta = 0.000001)
+fase_acotamiento(x0=0.6, delta = 0.000001, trace = TRUE)
+
+# Ejercicio direcciones conjugadas de powell
+fase_acotamiento(x0=1.55, delta = 0.000001, evalua = function(a){ (a^2-7)^2 + (a+9)^2})
+fase_acotamiento(x0=2.6, delta = 0.000001, evalua = function(a){ (2.08^2 + (4+a) -11)^2 + (2.08 + (4+a)^2 -7)^2})
+fase_acotamiento(x0=-1.59, delta = 0.000001, evalua = function(a){ ((a+2.08)^2+2.408-11)^2 + ((a+2.08)+2.408^2-7)^2 })
