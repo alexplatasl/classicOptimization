@@ -18,7 +18,7 @@ fibonacci <- function(n){
 
 #fibonacci(4)
 
-acotamiento_fibonacci <- function(a = 0, b = 5, n = 3, k = 2, eval = function(x){x^2 + 54/x}){
+acotamiento_fibonacci <- function(a = 0, b = 5, n = 3, k = 2, eval = function(x){x^2 + 54/x}, trace = FALSE){
   solucion <- c()
   iter = 1
   # Paso 1: 
@@ -63,10 +63,10 @@ acotamiento_fibonacci <- function(a = 0, b = 5, n = 3, k = 2, eval = function(x)
     
     # Paso 4
     if (k == n){
-      cat("Iteración:",iter,"\ta:", a,"\tb:",b,"\n")
+      if (trace) cat("Iteración:",iter,"\ta:", a,"\tb:",b,"\n")
       solucion <- c(a,b)
     }else{
-      cat("Iteración:",iter,"\ta:", a,"\tb:",b,"\n")
+      if (trace) cat("Iteración:",iter,"\ta:", a,"\tb:",b,"\n")
       iter = iter + 1
       k = k + 1
     }
@@ -74,14 +74,28 @@ acotamiento_fibonacci <- function(a = 0, b = 5, n = 3, k = 2, eval = function(x)
   solucion
 }
 
-acotamiento_fibonacci(n=3)
+# acotamiento_fibonacci(n=3)
 
+# # Ejercicio: Direcciones conjugadas de powell
+# acotamiento_fibonacci(a=-3, n=25, eval = function(a){ (a^2-7)^2 + (a+9)^2})
+# 
+# (x1^2 + x2 - 11)^2 + (x1 + x2^2 - 7)^2
+# 
+# acotamiento_fibonacci(a=-3, n=25, eval = function(a){ (2.08^2 + (4+a) -11)^2 + (2.08 + (4+a)^2 -7)^2})
+# acotamiento_fibonacci(a=-3, n=25, eval = function(a){ ((a+2.08)^2+2.408-11)^2 + ((a+2.08)+2.408^2-7)^2 })
+# acotamiento_fibonacci(a=-3, n=25, eval = function(a){ ((2.08 + a*1)^2+(2.408+a*0)-11)^2 + 
+#     ((2.08+a*1)+(2.408+a*0)^2-7)^2 })
+# acotamiento_fibonacci(a=-3, n=25, eval = evaluar)
+
+# c(2.88,2.408) - c(2.08, 4)
+
+#---------------------------------------------------------------------------------------------
 # Comparación de exactitud de métodos
-n = seq(5,20,5)
-Ln_half = (0.5^(n/2))*5
-Ln_fib = (2 / unlist(lapply(n+1, fibonacci))) * Lo
-Ln_gold = ((0.681)^(n-1))*Lo
-Lo = 5
-Rn_half = Ln_half / Lo
-Rn_fib = Ln_fib / Lo
-Rn_gold = Ln_gold / Lo
+# n = seq(5,20,5)
+# Ln_half = (0.5^(n/2))*5
+# Ln_fib = (2 / unlist(lapply(n+1, fibonacci))) * Lo
+# Ln_gold = ((0.681)^(n-1))*Lo
+# Lo = 5
+# Rn_half = Ln_half / Lo
+# Rn_fib = Ln_fib / Lo
+# Rn_gold = Ln_gold / Lo
