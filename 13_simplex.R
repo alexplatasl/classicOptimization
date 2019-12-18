@@ -29,15 +29,15 @@ simplex_method <- function(simplex = list(x1=c(0,0),x2=c(2,0),x3=c(1,1)), gamma 
 
     # Paso 3:
     # Calcula el punto reflejado
-    xr <- 2*xc - xh
+    xr <- abs(2*xc - xh)
     
     xnew <- xr                       # Default
     if (eval(xr) < eval(xl)){
-      xnew = (1+gamma)*xc - gamma*xh # Expansión
+      xnew = abs((1+gamma)*xc - gamma*xh) # Expansión
     }else if (eval(xr) >= eval(xh)){
-      xnew = (1-beta) * xc + beta*xh # Contracción 1
+      xnew = abs((1-beta) * xc + beta*xh) # Contracción 1
     }else if (eval(xg) < eval(xr) & eval(xr) < eval(xh)){
-      xnew = (1+beta)*xc - beta*xh   # Contracción 2
+      xnew = abs((1+beta)*xc - beta*xh)   # Contracción 2
     }
     
     # Reemplazos
@@ -58,7 +58,7 @@ simplex_method <- function(simplex = list(x1=c(0,0),x2=c(2,0),x3=c(1,1)), gamma 
   solucion <- data.frame(do.call(rbind, xls))
   
   p <- ggplot2::ggplot(solucion) +
-    ggplot2::geom_point(ggplot2::aes(x=X1, y= X2, colour = X4),size = 2) +
+    ggplot2::geom_point(ggplot2::aes(x=X1, y= X2, colour = X4, size = 1 / log(X4+1))) +
     ggplot2::geom_path(ggplot2::aes(x=X1, y= X2, colour = X4), 
                        arrow = ggplot2::arrow(angle = 15, ends = "last", 
                                               length = ggplot2::unit(0.10, "inches"), type = "closed")) +
@@ -71,4 +71,7 @@ simplex_method <- function(simplex = list(x1=c(0,0),x2=c(2,0),x3=c(1,1)), gamma 
   solucion
 }
 
-solucion <- simplex_method(gamma = 1.5, beta = 0.5, eps = 0.001)
+solucion <- simplex_method(gamma = 1.00, beta = 0.10, eps = 0.00001)
+
+
+
